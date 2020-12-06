@@ -1,0 +1,87 @@
+<div th:fragment="pagination">
+<!-- Pagination --> 									
+<div class="container" >	
+	<div class="row mt-2" th:if="${currentDisplay=='cards'}"></div>
+	<div class="row justify-content-center ">	
+ 		<div class="col-auto">
+ 			<nav th:if="${tasks.totalPages > 0}" aria-label="Page navigation">
+		    	<ul class="pagination pagination-sm ">
+		  	 		<li class="page-item" th:classappend="${tasks.number == 0} ? 'disabled'">
+		    			<a class="page-link" 
+				    	   th:href="@{/main/(description = ${title}, 
+				    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+				    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+				    	   					 status=${currentStatus},
+				    	   					 page=${1},
+				    	   					 pageSize=${tasks.size},
+				    	   					 sortBy=${sortingBy},
+				    	   					 display=${currentDisplay})}">
+				    	   &laquo;
+				    	</a>
+		    		</li>	  
+				    <li class="page-item" th:classappend="${tasks.number == 0} ? 'disabled'">
+				    	<a class="page-link" 
+				    	   th:href="@{/main/(description = ${title}, 
+				    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+				    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+				    	   					 status=${currentStatus},
+				    	   					 page=${tasks.number},
+				    	   					 pageSize=${tasks.size},
+				    	   					 sortBy=${sortingBy},
+				    	   					 display=${currentDisplay})}">
+				    	   &lsaquo;
+				    	</a>
+				    </li>		        
+				    <li class="page-item" th:classappend="${i == tasks.number+1} ? 'active'" th:each="i: ${#numbers.sequence(1, tasks.totalPages)}">
+				    	<a class="page-link" 
+				    	   th:href="@{/main/(description = ${title}, 
+				    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+				    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+				    	   					 status=${currentStatus},
+				    	   					 page=${i}, 
+				    	   					 pageSize=${currentSize},
+				    	   					 sortBy=${sortingBy},
+				    	   					 display=${currentDisplay}
+				    	   					 )}" 
+				    	   th:text="${i}">
+				    	</a>
+				    </li>		    
+				    <li class="page-item" th:classappend="${tasks.number + 1 == tasks.totalPages} ? 'disabled'">		    
+				   		<a class="page-link" 
+				   		   th:href="@{/main/(description = ${title},
+				   		   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+				    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+				    	   					 status=${currentStatus},
+				   		   					 page=${tasks.number+2},
+				   		   					 pageSize=${tasks.size},
+				   		   					 sortBy=${sortingBy},
+				    	   					 display=${currentDisplay})}">
+				   		   &rsaquo;
+				   		</a>
+				    </li>
+				    <li class="page-item" th:classappend="${tasks.number + 1 == tasks.totalPages} ? 'disabled'">
+				    	<a class="page-link" 
+				    	   th:href="@{/main/(description = ${title},
+				    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+				    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+				    	   					 status=${currentStatus},
+				    	   					 page=${tasks.totalPages},
+				    	   					 pageSize=${tasks.size},
+				    	   					 sortBy=${sortingBy},
+				    	   					 display=${currentDisplay})}">
+				    	   &raquo;
+				    	</a>
+				    </li>
+		  		</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<!-- Pagination -->	
+
+
+
+
+
+</div>
+

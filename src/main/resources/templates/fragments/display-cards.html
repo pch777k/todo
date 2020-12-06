@@ -1,0 +1,57 @@
+<div th:fragment="display-cards">
+	
+<div class="container" th:if="${currentDisplay=='cards'}">
+	<div class="row ">
+		<div class="col-md-6 " th:each="task:${tasks}" >
+			<div class="card cards mb-1" >
+				<div class="card-body">
+					<div class="row">		
+						<form th:action="@{/changeCompletedField/{id}/{partUrl} (id=${task.id}, 
+																	     partUrl=${ 'description=' + title
+																		 		  +	'&deadlineStart=' + #dates.format(dStart, 'yyyy-MM-dd') 
+																		 		  + '&deadlineEnd=' + #dates.format(dEnd, 'yyyy-MM-dd')
+																		 		  + '&status=' + currentStatus
+																		 		  + '&page=' + currentPage
+																		 		  + '&pageSize=' + tasks.size
+																		 		  + '&sortBy=' + sortingBy
+																		 		  + '&display=' + currentDisplay } ) }"  method="post">
+	
+	 						<input type="checkbox"  
+	 							   class="ml-2 mt-1 checkbox-completed"                        
+	                           	   th:value="${task.completed}" 
+	                           	   th:checked="*{task.completed}"  
+	                           	   onchange='this.form.submit()'/>                         
+	                    	<noscript> 
+								<button type="submit">Submit</button>
+							</noscript>
+	                    </form>
+	                    <span class="ml-2"> [[${task.description}]] </span>
+					</div>
+				</div>	  
+			  	<div class="card-footer d-flex justify-content-between text-muted">
+			  		<span ><i class="far fa-clock pr-1"></i>[[${#dates.format(task.deadline, 'yyyy-MM-dd')}]]</span>
+			  		<span th:if="${task.priority == T(com.pch777.entity.Priority).Low}" class="badge badge-success px-2 py-1">Low</span>
+			  		<span th:if="${task.priority == T(com.pch777.entity.Priority).Medium}" class="badge badge-warning px-2 py-1">Medium</span>
+			  		<span th:if="${task.priority == T(com.pch777.entity.Priority).High}" class="badge badge-danger px-2 py-1">High</span>
+			     	<span>
+			     		<a th:href="@{/findOne/(id=${task.id})}" class="eBtn"><span><i class="fas fa-pen"></i></span></a>
+						<a th:href="@{/delete/{id}/{partUrl} (id=${task.id}, partUrl=${ 'description=' + title
+																			 		  +	'&deadlineStart=' + #dates.format(dStart, 'yyyy-MM-dd') 
+																			 		  + '&deadlineEnd=' + #dates.format(dEnd, 'yyyy-MM-dd')
+																			 		  + '&status=' + currentStatus
+																			 		  + '&page=' + currentPage
+																			 		  + '&pageSize=' + tasks.size
+																			 		  + '&sortBy=' + sortingBy
+																			 		  + '&display=' + currentDisplay })}" 
+						   class="delBtn"><span><i class="fas fa-trash text-danger ml-2"></i></span>
+						</a>
+
+			    	</span>
+			  	</div>
+			</div>
+		</div>
+	</div>
+</div>
+		
+</div>
+

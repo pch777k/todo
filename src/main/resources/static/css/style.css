@@ -1,0 +1,63 @@
+html, body {
+  height: 100%;
+  background-color: #B7E9F7;
+}
+
+.wrapper {
+    min-height: 100%;
+    margin-bottom: -50px;
+    padding-bottom: 50px;
+    background-color: #B7E9F7;
+}
+
+footer {
+    height: 50px;
+}
+
+.td-width {
+	width: 70%;
+}
+.prepend-width {
+	width: 75px;
+}
+
+.prepend-width-sm {
+	width: 50px;
+}
+
+.prepend-width-lg {
+	width: 90px;
+	height: 31px;
+}
+
+.checkbox-update {
+	width:20px; 
+	height:20px; 
+	margin-top:5px; 
+}
+
+.checkbox-completed {
+	width: 20px; 
+	height: 20px;
+	margin-top:4px;
+}
+
+.remember-me {
+	width:15px; 
+	height:15px;
+	margin-top:2px; 
+}
+
+#sign-up {
+	text-decoration: none;
+}
+
+.nav>a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+
+
+

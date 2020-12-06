@@ -1,0 +1,23 @@
+<div th:fragment="information">
+	<div class="container">
+		<div class="row justify-content-center ">
+			<div class="col-md-6">
+				<div class="card mt-4" th:if="${currentStatus==0 and totalItmes == 0}">
+					<div class="card-body text-center" >
+				    	<span >There are no tasks</span>
+				    </div>
+				</div>
+				<div class="card mt-4" th:if="${currentStatus==1 and totalCompleted == 0}">
+					<div class="card-body text-center" >
+						<span >There are no completed tasks</span>
+					</div>
+				</div>
+				<div class="card mt-4" th:if="${currentStatus==2 and totalActive == 0}">
+					<div class="card-body text-center" >
+				    	<span >There are no active tasks</span>  
+				    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

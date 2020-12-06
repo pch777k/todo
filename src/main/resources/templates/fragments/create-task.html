@@ -1,0 +1,137 @@
+<div th:fragment="create-task">
+	
+	<div class="container">	
+		<div class="row">
+			<!-- Create a new task -->
+			<div class="col-md-6">
+	        	<div class="card ">
+	        		<div class="card-header text-center text-primary" >
+	            		<strong>Create new</strong>
+	          		</div>
+	        		<div class="card-block p-3">
+	           			<form name="newTaskform" 
+	           				  th:object="${task}"
+	           				  th:action="@{/addTask/{partUrl} (partUrl=${ 'description=' + title
+																			 		  +	'&deadlineStart=' + #dates.format(dStart, 'yyyy-MM-dd') 
+																			 		  + '&deadlineEnd=' + #dates.format(dEnd, 'yyyy-MM-dd')
+																			 		  + '&status=' + currentStatus
+																			 		  + '&page=' + currentPage
+																			 		  + '&pageSize=' + tasks.size
+																			 		  + '&sortBy=' + sortingBy
+																			 		  + '&display=' + currentDisplay } ) }" 
+							  method="post">
+							<!-- deadline -->
+							<div class="input-group input-group-sm date deadline-create">
+								<div class="input-group-prepend " >
+									<span class="input-group-text prepend-width">Deadline</span>
+								</div>
+								<input type="text" class="form-control form-control-sm " name="deadline" th:value="${#dates.format(deadline, 'yyyy-MM-dd')}" autocomplete="off" />
+								<div class="input-group-append ">
+									<span class="input-group-text bg-primary "><i class="far fa-calendar-alt text-white"></i></span>
+								</div>
+							</div>
+							<!-- deadline -->					  		
+							<!-- priority -->  		
+							<div class="input-group input-group-sm ">
+								<div class="input-group-prepend mt-1" >
+									<span class="input-group-text prepend-width">Priority</span>
+								</div>
+								<select class="custom-select mt-1" name="priority">
+									<option  th:value="${T(com.pch777.entity.Priority).Medium}">Medium</option>
+									<option  th:value="${T(com.pch777.entity.Priority).Low}">Low</option>		    
+									<option  th:value="${T(com.pch777.entity.Priority).High}">High</option>
+								</select>
+							</div>
+							<!-- priority -->
+							<!-- description -->
+							<div class="input-group input-group-sm mt-1">	
+								<div class="input-group-prepend" >
+									<span class="input-group-text prepend-width">Todo</span>
+								</div>
+									<input type="text" class="form-control form-control-sm " id="description" th:field="*{description}" required />
+														  			
+								<div class="input-group-append">
+									<button type="submit" class="btn btn-primary btn-sm "><i class="fas fa-plus"></i></button>	
+								</div>	
+							</div>
+							<!-- description -->
+						</form>	
+	       			</div>
+	        	</div>
+	    	</div>
+	    	<!-- End Create a new task -->
+	    	
+	    	<!-- Summary -->
+	    	<div class="col-md-6">
+	        	<div class="card ">
+	        		<div class="card-header text-center text-primary">
+	            		<strong>Summary</strong>
+	          		</div>       		
+	        		<div class="card-block p-3"> 
+		        		<div class="row">
+		        		<div class="col-md-6">
+		       			  		<nav class="nav nav-pills flex-column">
+									  <a class="nav-item  nav-link d-flex justify-content-between" th:classappend="${currentStatus == 0} ? 'active':''"  
+	 							   					 th:href="@{/main/(description = ${title}, 
+								   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')}, 
+	 		    	   					 			 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')}, 							   					 
+	 							   					 pageSize=${currentSize}, 
+	 							   					 sortBy=${sortingBy}, 
+	 		    	   					 			 display=${currentDisplay})}">All tasks<span >[[${totalItmes}]]</span></a>
+									  <a class="nav-item nav-link d-flex justify-content-between" th:classappend="${currentStatus == 1} ? 'active':''"  
+	 							   					 th:href="@{/main/(description = ${title}, 
+								   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')}, 
+	 		    	   					 			 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')}, 
+								   					 status = ${1}, 
+	 							   					 pageSize=${currentSize}, 
+	 							   					 sortBy=${sortingBy}, 
+	 		    	   					 			 display=${currentDisplay})}">Completed <span >[[${totalCompleted}]]</span></a> 
+									  <a class="nav-item nav-link d-flex justify-content-between" th:classappend="${currentStatus == 2} ? 'active':''"  
+	 							   					 th:href="@{/main/(description = ${title}, 
+								   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')}, 
+	 		    	   					 			 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')}, 
+								   					 status = ${2}, 
+	 							   					 pageSize=${currentSize}, 
+	 							   					 sortBy=${sortingBy}, 
+	 		    	   					 			 display=${currentDisplay})}">Active <span >[[${totalActive}]]</span></a>
+								</nav>
+							</div>
+			        		<div class="col-md-6">         
+								<!-- Search from date to date -->
+								<form  id="dateForm ">  
+									<input type="hidden" th:value="${currentSize}" name="pageSize" />
+									<input type="hidden" th:value="${sortingBy}" name="sortBy" />
+									<input type="hidden" th:value="${currentStatus}" name="status" />
+									<input type="hidden" th:value="${currentDisplay}" name="display" />	
+									<div class="text-center p-1 mb-1">
+									<span class="text-primary"><strong>Select a period of time</strong></span>	
+									</div>
+									<div class="datepicker-start input-group input-group-sm date mb-1" >
+										<div class="input-group-prepend ">
+											<span class="input-group-text prepend-width-sm" >from</span>
+										</div>
+										<input onchange='this.form.submit()'  type="text"  class="form-control form-control-sm " name="deadlineStart" th:value="${#dates.format(dStart, 'yyyy-MM-dd')}" autocomplete="off" />   
+									</div>
+									<div class="datepicker-end input-group input-group-sm date ">
+										<div class="input-group-prepend" >
+											<span class="input-group-text prepend-width-sm"  >to</span>
+										</div>
+										<input onchange='this.form.submit()'  type="text"  class="form-control form-control-sm " name="deadlineEnd" th:value="${#dates.format(dEnd, 'yyyy-MM-dd')}" autocomplete="off" />
+									</div>
+									<noscript> 
+										<button type="submit" th:href="@{/main/(dStart=${deadlineStart}, dEnd=${deadlineEnd})}" class="btn btn-primary btn-sm ">Submit</button>
+									</noscript>				
+								</form>
+								<!-- Search from date to date -->						
+							</div>
+		       			  	
+		       			</div>
+	        		</div>
+	    		</div>	
+			</div>
+			<!-- End Summary -->
+		</div>
+	</div>
+		
+</div>
+

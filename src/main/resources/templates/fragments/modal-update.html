@@ -1,0 +1,71 @@
+<div th:fragment="modal-update">
+									
+	<div class="updateForm">
+		<form method="post" th:action="@{/updateTask/{partUrl} (partUrl=${'description=' + title
+																		+ '&deadlineStart=' + #dates.format(dStart, 'yyyy-MM-dd') 
+																		+ '&deadlineEnd=' + #dates.format(dEnd, 'yyyy-MM-dd')
+																		+ '&status=' + currentStatus
+																		+ '&page=' + currentPage
+																		+ '&pageSize=' + tasks.size
+																		+ '&sortBy=' + sortingBy
+																		+ '&display=' + currentDisplay})}">
+			<div class="modal fade" id="updateModal" role="dialog" tabindex="-1">
+	        	<div class="modal-dialog" role="document">
+	            	<div class="modal-content">
+	                	<div class="modal-header justify-content-center bg-light text-primary" >            	 
+	            			<strong>Update</strong>
+	                    </div>
+	                    <div class="modal-body">
+	                    	<!-- id -->
+	                    	<input type="hidden" class="form-control" id="id" name="id" value=""/>
+	                    	<!-- end id -->
+			                <!-- priority -->  		
+					  		<div class="input-group input-group-sm">
+								<div class="input-group-prepend mt-1" >
+			  				    	<span class="input-group-text prepend-width-lg">Priority</span>
+			  				    </div>
+								<select class="custom-select mt-1"  id="priority" name="priority">
+							   		<option >Medium</option>
+							    	<option >Low</option>
+							    	<option >High</option>
+							  	</select>
+							</div>
+							<!-- end priority -->
+			                <!-- description -->				
+							<div class="input-group input-group-sm mt-1">	
+							  	<div class="input-group-prepend" >
+				  				    <span class="input-group-text prepend-width-lg">Todo</span>
+				  			    </div>
+						  			<input type="text" class="form-control form-control-sm " id="description" name="description"  value="" required/>
+							</div>
+							<!-- end description -->
+	                         <!-- deadline -->
+							<div class="input-group input-group-sm mt-1 date">
+			  					<div class="input-group-prepend " >
+			  				    	<span class="input-group-text prepend-width-lg" >Deadline</span>
+			  				    </div>
+			                    <input type="text" class="form-control form-control-sm " id="deadline" name="deadline" value="" required/>
+			  				</div>	
+			 				<!-- end deadline -->   
+							<!-- completed -->
+						  	<div class="input-group input-group-sm mt-1 date">	
+							  	<div class="input-group-prepend" >
+				  				    <span class="input-group-text prepend-width-lg mr-2">Completed</span>	  				    
+							  	</div>		  	
+						  	  		<input  type="checkbox" class="checkbox-update"  name="completed" id="completed" >
+							</div>
+							<!-- end completed -->
+	
+	                     </div>
+						 <div class="modal-footer mt-3">
+	                     	<button class="btn btn-sm btn-secondary" data-dismiss="modal" type="button">Close </button>
+	                        <input class="btn btn-sm btn-primary" type="submit" value="Update"/>
+	                     </div>
+	                </div>
+	            </div>
+	        </div>
+	   </form>
+	</div>
+
+</div>
+

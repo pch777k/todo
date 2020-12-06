@@ -1,0 +1,63 @@
+<div th:fragment="display-table">
+	
+<div class="container" th:if="${currentDisplay=='table'}">
+	<div class="row" th:if="${(currentStatus==0 and totalItmes > 0) or (currentStatus==1 and totalCompleted > 0) or (currentStatus==2 and totalActive > 0)}">
+		<div class="col-12">
+			<table class="table table-bordered table-sm table-hover" style="background-color: white;">
+				<thead>
+					<tr class="text-primary">
+						<th class="text-center"><i class="fas fa-check"></i></th>
+						<th class="text-center">Todo</th>
+						<th class="text-center">Deadline</th>
+ 						<th class="text-center">Priority</th>
+						<th class="text-center">Action</th>						
+					</tr>	
+				</thead>
+				<tbody>
+					<tr th:each="task:${tasks}">						
+						<td class="text-center">
+							<form  th:action="@{/changeCompletedField/{id}/{partUrl} (id=${task.id}, partUrl=${'description=' + title
+																			 		  +	'&deadlineStart=' + #dates.format(dStart, 'yyyy-MM-dd') 
+																			 		  + '&deadlineEnd=' + #dates.format(dEnd, 'yyyy-MM-dd')
+																			 		  + '&status=' + currentStatus
+																			 		  + '&page=' + currentPage
+																			 		  + '&pageSize=' + tasks.size
+																			 		  + '&sortBy=' + sortingBy
+																			 		  + '&display=' + currentDisplay } ) }"  method="post">
+ 								<input type="checkbox" 
+ 									   class="checkbox-completed" 	                           
+		                           	   th:value="${task.completed}" 
+		                           	   th:checked="*{task.completed}"  
+		                           	   onchange='this.form.submit()'/>    
+		                    	<noscript> 
+									<button type="submit">Submit</button>
+								</noscript>
+                    		</form>
+						</td>
+						<td class="td-width align-middle" th:text="${task.description}"></td>
+						<td class="text-center align-middle" th:text="${#dates.format(task.deadline, 'yyyy-MM-dd')}"></td>
+						<td class="bg-success text-white text-center align-middle" th:if="${task.priority == T(com.pch777.entity.Priority).Low}">Low</td>
+						<td class="bg-warning text-center align-middle" th:if="${task.priority == T(com.pch777.entity.Priority).Medium}">Medium</td>
+						<td class="bg-danger text-white text-center align-middle" th:if="${task.priority == T(com.pch777.entity.Priority).High}">High</td>
+ 						<td class="text-center align-middle">  	
+ 							<a th:href="@{/findOne/(id=${task.id})}" class="eBtn"><span><i class="fas fa-pen"></i></span></a>
+							<a th:href="@{/delete/{id}/{partUrl}(id=${task.id}, partUrl=${'description=' + title
+																			 		  +	'&deadlineStart=' + #dates.format(dStart, 'yyyy-MM-dd') 
+																			 		  + '&deadlineEnd=' + #dates.format(dEnd, 'yyyy-MM-dd')
+																			 		  + '&status=' + currentStatus
+																			 		  + '&page=' + currentPage
+																			 		  + '&pageSize=' + tasks.size
+																			 		  + '&sortBy=' + sortingBy
+																			 		  + '&display=' + currentDisplay })}" class="delBtn">
+							   <span><i class="fas fa-trash text-danger ml-2"></i></span>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>	
+</div>
+		
+</div>
+

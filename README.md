@@ -1,7 +1,5 @@
 # Todo application in Spring
 
-<a href="https://todo-pch777.herokuapp.com" target="_blank">Todo</a>
-
 https://todo-pch777.herokuapp.com
 
 Simple Todo-list app created with Spring. The application allows the user to create an account. After we login, we can create tasks, display tasks, update and delete a specific task. The app enables us to search, sort tasks and select a time frame. We can display results in a tabular form or as cards. 

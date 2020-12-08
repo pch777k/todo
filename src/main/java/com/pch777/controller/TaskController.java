@@ -42,7 +42,7 @@ public class TaskController {
 		Task task = taskService.findById(id);
 		return task;
 	}
-
+	
 	@PostMapping("/changeCompletedField/{id}/{partUrl}")
 	public String changeCompletedField(@PathVariable("id") Long id, @PathVariable String partUrl, Principal principal) {
 		Task task = taskService.findById(id);

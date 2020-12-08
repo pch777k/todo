@@ -38,10 +38,7 @@ public class MainController {
 						  @RequestParam(defaultValue = "1") int page,
 						  @RequestParam(defaultValue = "10") int pageSize,
 						  @RequestParam(defaultValue = "description") String sortBy,
-						  @RequestParam(defaultValue = "cards") String display
-						  
-//						  @RequestParam(defaultValue = "ASC") String sortDirection
-						  )  {
+						  @RequestParam(defaultValue = "cards") String display)  {
 		
 		
 		String email = principal.getName();
@@ -50,23 +47,16 @@ public class MainController {
 		Date today = new Date();
 		
 		if(deadlineStart == null) {
-			deadlineStart = new Date();
+			deadlineStart = today;
 		}
 		
 		if(deadlineEnd == null) {
-			Date date = new Date();
 			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(date); 
+			calendar.setTime(today); 
 			calendar.add(Calendar.DATE, 14);
-			date = calendar.getTime();
-			deadlineEnd = date;
+			deadlineEnd = calendar.getTime();
 		}
 		
-		
-		
-		Pageable pageable = PageRequest.of(page-1, pageSize);
-		
-	//	Page<Task> tasks = taskService.findAllByUser(user, PageRequest.of(page, 4));
 		Sort sortDir = Sort.by(sortBy);
 		if(sortBy.contains("Desc")) {
 			sortBy = sortBy.substring(0, sortBy.length()-4);
@@ -74,33 +64,29 @@ public class MainController {
 			sortBy += "Desc";
 		}
 		
+		Pageable pageable = PageRequest.of(page-1, pageSize, sortDir);
 		
 		Page<Task> tasks = taskService.findAllByUserAndDescriptionLikeAndDeadlineBetween(user, 
 																						 description, 
 																						 deadlineStart, 
 																						 deadlineEnd, 
-																						 PageRequest.of(page-1, pageSize, sortDir));
+																						 pageable);
 		model.addAttribute("totalItmes", tasks.getTotalElements());
-	//	long totalElements = tasks.getTotalElements();
-		
 		
 			if(status == 1) {
 				tasks = taskService.findAllByUserAndCompletedIsTrueAndDescriptionLikeAndDeadlineBetween(user, 
 																										description,
 																										deadlineStart, 
 																										deadlineEnd, 
-																										PageRequest.of(page-1, pageSize, sortDir));
+																										pageable);
 			}
 			if(status == 2) {
 				tasks = taskService.findAllByUserAndCompletedIsFalseAndDescriptionLikeAndDeadlineBetween(user, 
 																									     description,
 																										 deadlineStart, 
 																										 deadlineEnd, 
-																										 PageRequest.of(page-1, pageSize, sortDir));
+																										 pageable);
 			}
-		
-		
-	
 		
 		model.addAttribute("totalActive", taskService.findByUserAndCompletedIsFalseAndDescriptionLikeAndDeadlineBetween(user, 
 																														description,
@@ -111,10 +97,6 @@ public class MainController {
 																														  deadlineStart,
 																														  deadlineEnd).size());
 
-		
-		
-		
-		model.addAttribute("today", today);
 		model.addAttribute("dEnd", deadlineEnd);
 		model.addAttribute("dStart", deadlineStart);
 		model.addAttribute("createdUserDate", user.getCreatedAt());
@@ -131,14 +113,5 @@ public class MainController {
 		
 		return "main";
 	}
-	
-
-	
-
-	
-	
-	
- 	
-
 	
 }

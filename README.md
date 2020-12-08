@@ -20,9 +20,9 @@ App enables search, sort tasks and select a period time. We can display results 
 
 ## Screenshots
 ##### Sign up Page
-[![signup.png](https://i.postimg.cc/zGzRJrQb/signup.png)](https://postimg.cc/TpsP9Zff)
+[![signup.png](https://i.postimg.cc/9MX6kGXf/signup.png)](https://postimg.cc/TySNL5D8)
 ##### Login Page
-[![login.png](https://i.postimg.cc/cLLVyFQ7/login.png)](https://postimg.cc/D8RC1dpm)
+[![login.png](https://i.postimg.cc/2yyf1ngt/login.png)](https://postimg.cc/G8WfNTLP)
 ##### Main page, after login
 [![first-login.png](https://i.postimg.cc/fTcz5Ws3/first-login.png)](https://postimg.cc/xcdV12cY)
 ##### All tasks, sort by deadline, view as cards 

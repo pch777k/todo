@@ -31,7 +31,10 @@
 				    	   					 display=${currentDisplay})}">
 				    	   &lsaquo;
 				    	</a>
-				    </li>		        
+				    </li>	
+				    
+				    <th:block th:if="${totalPages <= 10}">
+				    	        
 				    <li class="page-item" th:classappend="${i == tasks.number+1} ? 'active'" th:each="i: ${#numbers.sequence(1, tasks.totalPages)}">
 				    	<a class="page-link" 
 				    	   th:href="@{/main/(description = ${title}, 
@@ -45,7 +48,128 @@
 				    	   					 )}" 
 				    	   th:text="${i}">
 				    	</a>
-				    </li>		    
+				    </li>	
+				    </th:block>
+				    <th:block th:if="${totalPages > 10}">
+				    	<th:block th:if="${currentPage <= 5 or currentPage >= totalPages - 4}">
+				    	  <li class="page-item" th:classappend="${i == tasks.number+1} ? 'active'" th:each="i: ${#numbers.sequence(1, 5)}">
+					    	<a class="page-link" 
+					    	   th:href="@{/main/(description = ${title}, 
+					    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+					    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+					    	   					 status=${currentStatus},
+					    	   					 page=${i}, 
+					    	   					 pageSize=${currentSize},
+					    	   					 sortBy=${sortingBy},
+					    	   					 display=${currentDisplay}
+					    	   					 )}" 
+					    	   th:text="${i}">
+					    	</a>
+				    	</li>	
+				    		
+				    		<a th:if="${currentPage<=5}" class="page-link" 
+					    	   th:href="@{/main/(description = ${title}, 
+					    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+					    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+					    	   					 status=${currentStatus},
+					    	   					 page=${6}, 
+					    	   					 pageSize=${currentSize},
+					    	   					 sortBy=${sortingBy},
+					    	   					 display=${currentDisplay}
+					    	   					 )}" 
+					    	   th:text="...">
+					    	</a>
+					    	<a th:if="${currentPage>=9}" class="page-link" 
+					    	   th:href="@{/main/(description = ${title}, 
+					    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+					    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+					    	   					 status=${currentStatus},
+					    	   					 page=${8}, 
+					    	   					 pageSize=${currentSize},
+					    	   					 sortBy=${sortingBy},
+					    	   					 display=${currentDisplay}
+					    	   					 )}" 
+					    	   th:text="...">
+					    	</a>
+					    	
+					    	<li class="page-item" th:classappend="${i == tasks.number+1} ? 'active'" th:each="i: ${#numbers.sequence(totalPages - 4, totalPages)}">
+					    	<a class="page-link" 
+					    	   th:href="@{/main/(description = ${title}, 
+					    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+					    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+					    	   					 status=${currentStatus},
+					    	   					 page=${i}, 
+					    	   					 pageSize=${currentSize},
+					    	   					 sortBy=${sortingBy},
+					    	   					 display=${currentDisplay}
+					    	   					 )}" 
+					    	   th:text="${i}">
+					    	</a>
+				    	</li>	
+				    	</th:block>	
+				    	<th:block th:if="${currentPage > 5 and currentPage < totalPages - 4}">
+				    		<a class="page-link" 
+					    	   th:href="@{/main/(description = ${title}, 
+					    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+					    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+					    	   					 status=${currentStatus},
+					    	   					 page=${currentPage-5}, 
+					    	   					 pageSize=${currentSize},
+					    	   					 sortBy=${sortingBy},
+					    	   					 display=${currentDisplay}
+					    	   					 )}" 
+					    	   th:text="...">
+					    	</a>
+					    	
+					    	<li class="page-item" th:classappend="${i == tasks.number+1} ? 'active'" th:each="i: ${#numbers.sequence(currentPage - 4, currentPage + 4)}">
+					    	<a class="page-link" 
+					    	   th:href="@{/main/(description = ${title}, 
+					    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+					    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+					    	   					 status=${currentStatus},
+					    	   					 page=${i}, 
+					    	   					 pageSize=${currentSize},
+					    	   					 sortBy=${sortingBy},
+					    	   					 display=${currentDisplay}
+					    	   					 )}" 
+					    	   th:text="${i}">
+					    	</a>
+				    	</li>	
+					    	
+					    		<a class="page-link" 
+					    	   th:href="@{/main/(description = ${title}, 
+					    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')},
+					    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')},
+					    	   					 status=${currentStatus},
+					    	   					 page=${currentPage+5}, 
+					    	   					 pageSize=${currentSize},
+					    	   					 sortBy=${sortingBy},
+					    	   					 display=${currentDisplay}
+					    	   					 )}" 
+					    	   th:text="...">
+					    	</a>
+				    	
+				    	</th:block>
+				    	
+				    	
+				    	
+				    	        
+				    </th:block>
+				    
+<!-- 				    <li class="page-item" th:classappend="${i == tasks.number+1} ? 'active'" th:each="i: ${#numbers.sequence(1, tasks.totalPages)}"> -->
+<!-- 				    	<a class="page-link"  -->
+<!-- 				    	   th:href="@{/main/(description = ${title},  -->
+<!-- 				    	   					 deadlineStart=${#dates.format(dStart, 'yyyy-MM-dd')}, -->
+<!-- 				    	   					 deadlineEnd=${#dates.format(dEnd, 'yyyy-MM-dd')}, -->
+<!-- 				    	   					 status=${currentStatus}, -->
+<!-- 				    	   					 page=${i},  -->
+<!-- 				    	   					 pageSize=${currentSize}, -->
+<!-- 				    	   					 sortBy=${sortingBy}, -->
+<!-- 				    	   					 display=${currentDisplay} -->
+<!-- 				    	   					 )}"  -->
+<!-- 				    	   th:text="${i}"> -->
+<!-- 				    	</a> -->
+<!-- 				    </li>		     -->
 				    <li class="page-item" th:classappend="${tasks.number + 1 == tasks.totalPages} ? 'disabled'">		    
 				   		<a class="page-link" 
 				   		   th:href="@{/main/(description = ${title},

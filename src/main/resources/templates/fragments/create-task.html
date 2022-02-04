@@ -1,10 +1,10 @@
 <div th:fragment="create-task">
 	
 	<div class="container">	
-		<div class="row">
-			<!-- Create a new task -->
-			<div class="col-md-6">
-	        	<div class="card ">
+	<div class="row justify-content-center  mt-4">
+	<!-- Create a new task --> 
+	    <div class="col-12 col-md-5 col-lg-6">
+		<div class="card ">
 	        		<div class="card-header text-center text-primary" >
 	            		<strong>Create new</strong>
 	          		</div>
@@ -36,7 +36,7 @@
 								<div class="input-group-prepend mt-1" >
 									<span class="input-group-text prepend-width">Priority</span>
 								</div>
-								<select class="custom-select mt-1" name="priority">
+								<select class="custom-select custom-select-sm mt-1" name="priority">
 									<option  th:value="${T(com.pch777.entity.Priority).Medium}">Medium</option>
 									<option  th:value="${T(com.pch777.entity.Priority).Low}">Low</option>		    
 									<option  th:value="${T(com.pch777.entity.Priority).High}">High</option>
@@ -60,10 +60,9 @@
 	        	</div>
 	    	</div>
 	    	<!-- End Create a new task -->
-	    	
 	    	<!-- Summary -->
-	    	<div class="col-md-6">
-	        	<div class="card ">
+	<div class="col-12 col-md-7 col-lg-6">
+		<div class="card ">
 	        		<div class="card-header text-center text-primary">
 	            		<strong>Summary</strong>
 	          		</div>       		
@@ -104,7 +103,7 @@
 									<input type="hidden" th:value="${currentStatus}" name="status" />
 									<input type="hidden" th:value="${currentDisplay}" name="display" />	
 									<div class="text-center p-1 mb-1">
-									<span class="text-primary"><strong>Select a period of time</strong></span>	
+									<span class="text-primary"><strong>Period of time</strong></span>	
 									</div>
 									<div class="datepicker-start input-group input-group-sm date mb-1" >
 										<div class="input-group-prepend ">
@@ -130,7 +129,7 @@
 	    		</div>	
 			</div>
 			<!-- End Summary -->
-		</div>
+	</div>
 	</div>
 		
 </div>

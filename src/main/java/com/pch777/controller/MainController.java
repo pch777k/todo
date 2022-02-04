@@ -110,6 +110,7 @@ public class MainController {
 		model.addAttribute("currentSize", pageable.getPageSize());
 		model.addAttribute("currentStatus", status);
 		model.addAttribute("currentDisplay", display);
+		model.addAttribute("totalPages", tasks.getTotalPages());
 		
 		return "main";
 	}

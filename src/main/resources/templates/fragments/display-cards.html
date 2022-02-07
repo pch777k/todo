@@ -20,7 +20,7 @@
 	 							   class="ml-2 mt-1 checkbox-completed"                        
 	                           	   th:value="${task.completed}" 
 	                           	   th:checked="*{task.completed}"  
-	                           	   onchange='this.form.submit()'/>                         
+	                           	   onchange="this.form.submit()"/>                         
 	                    	<noscript> 
 								<button type="submit">Submit</button>
 							</noscript>
@@ -34,7 +34,7 @@
 			  		<span th:if="${task.priority == T(com.pch777.entity.Priority).Medium}" class="badge badge-warning px-2 py-1">Medium</span>
 			  		<span th:if="${task.priority == T(com.pch777.entity.Priority).High}" class="badge badge-danger px-2 py-1">High</span>
 			     	<span>
-			     		<a th:href="@{/findOne/(id=${task.id})}" class="eBtn"><span><i class="fas fa-pen"></i></span></a>
+			     		<a th:href="@{/findOne/(id=${task.id})}" class="eBtn" data-toggle="modal" data-target="#updateModal"><span><i class="fas fa-pen"></i></span></a>
 						<a th:href="@{/delete/{id}/{partUrl} (id=${task.id}, partUrl=${ 'description=' + title
 																			 		  +	'&deadlineStart=' + #dates.format(dStart, 'yyyy-MM-dd') 
 																			 		  + '&deadlineEnd=' + #dates.format(dEnd, 'yyyy-MM-dd')

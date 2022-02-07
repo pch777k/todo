@@ -18,7 +18,8 @@
     <div class="wrapper">
     
     <div th:replace="fragments/header :: header"></div>
-   <!-- Create a new task and summary -->
+   	
+   	<!-- Create a new task and summary -->
 	<div th:replace="fragments/create-task :: create-task"></div>
     
     <!-- Page size, type of view, sort by, search  --> 
@@ -32,7 +33,7 @@
 
 	<!-- Display table -->		
 	<div th:replace="fragments/display-table :: display-table"></div>
-    
+     
     <!-- Modal for removing task -->
 	<div th:replace="fragments/modal-delete :: modal-delete"></div>
 
@@ -44,12 +45,13 @@
 	
     <!-- Footer -->
     <div th:replace="fragments/footer :: footer"></div> 
-    
+
+
     </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" type ="text/javascript"></script>
@@ -58,6 +60,8 @@
 
 
 	<script th:inline="javascript">
+	
+	
     $('.deadline-create, .datepicker-start, .datepicker-end, #deadline').datepicker({
         autoclose: true,
         todayHighlight: true,
@@ -76,6 +80,7 @@
     var deadlineEnd = [[${#dates.format(dEnd, 'yyyy-MM-dd')}]];
     $('.datepicker-start').datepicker("setEndDate", '' + deadlineEnd);     
 
+    
 	</script>
   </body>
 </html>
